@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- =========================================================
+         Project Coordinates
+         These three values (groupId + artifactId + version)
+         uniquely identify this artifact in any Maven repository.
+    ========================================================= -->
+    <groupId>com.gitops</groupId>
+    <artifactId>gitops-app</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>gitops-app</name>
+    <description>Spring Boot app — GitOps + Observability portfolio project</description>
+
+    <!-- =========================================================
+         Parent: Spring Boot BOM (Bill of Materials)
+         Inheriting from spring-boot-starter-parent gives us:
+           - Dependency version management (no need to pin most versions)
+           - Default Maven plugin configuration
+           - Resource filtering for application.properties
+    ========================================================= -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.5</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <!-- Java 17 LTS — matches our Dockerfile base image.
+             Spring Boot 3.x requires Java 17 as minimum. -->
+        <java.version>17</java.version>
+    </properties>
+
+    <dependencies>
+
+        <!-- =====================================================
+             Web: Brings in embedded Tomcat + Spring MVC.
+             This is what allows us to serve REST endpoints
+             without deploying to an external app server.
+        ===================================================== -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- =====================================================
+             Actuator: Exposes production-ready endpoints:
+               /actuator/health  — liveness/readiness probes
+               /actuator/info    — build metadata
+               /actuator/prometheus — Prometheus scrape endpoint
+             This is what Prometheus will scrape in Phase 2.
+        ===================================================== -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- =====================================================
+             Micrometer Prometheus Registry:
+             Micrometer is Spring Boot's metrics facade (like SLF4J
+             is for logging). The prometheus registry formats metrics
+             in the Prometheus exposition format that Prometheus
+             expects to scrape at /actuator/prometheus.
+        ===================================================== -->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+
+        <!-- =====================================================
+             Test: JUnit 5 + Mockito + Spring Test support.
+             'test' scope means this is never bundled into the
+             final JAR — only used during the Maven test phase.
+        ===================================================== -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <!-- =================================================
+                 Spring Boot Maven Plugin:
+                 Repackages the standard JAR into an executable
+                 "fat JAR" (uber JAR) that bundles all dependencies.
+                 This is what lets us run: java -jar gitops-app.jar
+                 The 'repackage' goal runs automatically in the
+                 'package' phase via the parent BOM configuration.
+            ================================================= -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

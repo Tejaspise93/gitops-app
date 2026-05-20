@@ -1,5 +1,5 @@
 // =============================================================================
-// Jenkinsfile — Declarative Pipeline for gitops-app
+// Jenkinsfile — gitops-app
 //
 // CREDENTIALS (configure in Jenkins → Manage Jenkins → Credentials):
 //   dockerhub-credentials  : Username/Password — Docker Hub login

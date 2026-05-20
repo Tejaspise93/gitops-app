@@ -6,6 +6,7 @@
 //   github-token           : Secret Text — GitHub PAT for pushing to gitops-config
 //   git-user-email         : Secret Text — email for git commit in config repo
 //   git-user-name          : Secret Text — name for git commit in config repo
+//   github-app-repo        : Username/Password (pat) — gitHub login
 // =============================================================================
 
 pipeline {

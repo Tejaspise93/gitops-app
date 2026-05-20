@@ -1,4 +1,4 @@
-package com.gitops.gitopsapp;
+package com.gitops.app;   // ← must match your actual package, not gitopsapp
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,8 +8,7 @@ class GitopsAppApplicationTests {
 
     @Test
     void contextLoads() {
-        // Verifies the Spring application context starts without errors.
-        // This is the minimum smoke test for any Spring Boot app.
+        // Verifies Spring context starts successfully
     }
 
 }

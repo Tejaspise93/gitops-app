@@ -292,7 +292,7 @@ pipeline {
                         # Clone using the GitHub token embedded in the HTTPS URL.
                         # Token-in-URL is standard for CI automation with GitHub.
                         # The token is masked in Jenkins logs by the credentials binding.
-                        git clone https://${GH_TOKEN}@github.com/YOUR_USERNAME/${CONFIG_REPO_NAME}.git
+                        git clone https://${GH_TOKEN}@github.com/Tejaspise93/${CONFIG_REPO_NAME}.git
 
                         cd ${CONFIG_REPO_NAME}
 

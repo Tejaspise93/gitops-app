@@ -25,7 +25,7 @@
 #
 # We use the JDK (not JRE) here because Maven needs the full JDK to compile.
 # 'alpine' variant keeps the builder image smaller, speeding up CI layer caching.
-FROM eclipse-temurin:17-jdk-alpine AS builder
+FROM maven:3.9-eclipse-temurin-17 AS builder
 
 # Set a clean working directory inside the builder container.
 # All subsequent COPY and RUN commands in this stage operate relative to this.

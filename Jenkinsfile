@@ -54,7 +54,7 @@ pipeline {
 
         // Separate config repo details — this is the GitOps config repository
         // that ArgoCD (Phase 2) will watch. Replace with your actual values.
-        CONFIG_REPO_URL  = "https://github.com/YOUR_USERNAME/gitops-config.git"
+        CONFIG_REPO_URL  = "https://github.com/Tejaspise93/gitops-config.git"
         CONFIG_REPO_NAME = "gitops-config"
 
         // Path inside the config repo where the image tag lives.

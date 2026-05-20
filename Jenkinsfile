@@ -140,9 +140,6 @@ pipeline {
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
                     sh """
-                        # Login to Docker Hub.
-                        # '--password-stdin' avoids the password appearing in
-                        # the process list (ps aux) — more secure than -p flag.
                         echo "${DOCKER_PASS}" | docker login -u "${DOCKER_USER}" --password-stdin
 
                         echo "Pushing ${IMAGE_NAME}:${IMAGE_TAG} to Docker Hub..."
@@ -153,6 +150,15 @@ pipeline {
 
                         echo "Push complete. Logging out of Docker Hub."
                         docker logout
+                    """
+                }
+            }
+            post {
+                always {
+                    // Remove local images after push regardless of success or failure.
+                    sh """
+                        docker rmi ${IMAGE_NAME}:${IMAGE_TAG} || true
+                        docker rmi ${IMAGE_NAME}:latest       || true
                     """
                 }
             }
@@ -179,10 +185,11 @@ pipeline {
                         git config user.email "${GIT_EMAIL}"
                         git config user.name  "${GIT_NAME}"
 
-                        sed -i 's|tag: ".*"|tag: "${IMAGE_TAG}"|g' ${VALUES_FILE_PATH}
+                        yq e '.image.tag = "${IMAGE_TAG}"' -i ${VALUES_FILE_PATH}
 
                         echo "Updated ${VALUES_FILE_PATH}:"
                         grep 'tag:' ${VALUES_FILE_PATH}
+                        cat ${VALUES_FILE_PATH}
 
                         git add ${VALUES_FILE_PATH}
                         git commit -m "ci: update gitops-app image tag to ${IMAGE_TAG} [build #${BUILD_NUMBER}]"
@@ -229,7 +236,13 @@ pipeline {
         }
 
         always {
-            cleanWs()
+            cleanWs(
+                cleanWhenSuccess: true,
+                cleanWhenFailure: true,
+                cleanWhenAborted: true,
+                deleteDirs:       true,
+                notFailBuild:     true
+            )
         }
     }
 

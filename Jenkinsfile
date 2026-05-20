@@ -41,7 +41,7 @@ pipeline {
 
         // Docker Hub image name — replace YOUR_DOCKERHUB_USERNAME
         // Format: <dockerhub-username>/<repository-name>
-        IMAGE_NAME = "YOUR_DOCKERHUB_USERNAME/gitops-app"
+        IMAGE_NAME = "tejaspise/gitops-app"
 
         // Tag the image with the Git commit SHA for full traceability.
         // GIT_COMMIT is a built-in Jenkins environment variable (40-char SHA).

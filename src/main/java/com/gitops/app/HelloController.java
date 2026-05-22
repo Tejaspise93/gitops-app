@@ -23,7 +23,7 @@ public class HelloController {
     @GetMapping("/hello")
     public ResponseEntity<Map<String, String>> hello() {
         Map<String, String> response = new HashMap<>();
-        response.put("message", "Hello from GitOps pipeline!");
+        response.put("message", "Hello from app version 0.0.4-SNAPSHOT");
         return ResponseEntity.ok(response);
     }
 

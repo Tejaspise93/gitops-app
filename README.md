@@ -41,13 +41,6 @@ A minimal Java Spring Boot application built as the deployment target for a GitO
 | Git | Checkout source code and push to config repo |
 | `yq` | YAML-aware image tag update in config repo |
 
-> **Docker socket permission:** The Jenkins user on the agent must be in the `docker` group, or the socket must be accessible. Without this, the Docker Build stage will fail with `permission denied on /var/run/docker.sock`.
->
-> Fix on the Jenkins agent:
-> ```bash
-> sudo usermod -aG docker jenkins
-> sudo systemctl restart jenkins
-> ```
 
 ---
 

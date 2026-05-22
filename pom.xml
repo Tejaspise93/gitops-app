@@ -6,14 +6,9 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- =========================================================
-         Project Coordinates
-         These three values (groupId + artifactId + version)
-         uniquely identify this artifact in any Maven repository.
-    ========================================================= -->
     <groupId>com.gitops</groupId>
     <artifactId>gitops-app</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>gitops-app</name>
@@ -65,8 +60,8 @@
 
         <!-- =====================================================
              Micrometer Prometheus Registry:
-             Micrometer is Spring Boot's metrics facade (like SLF4J
-             is for logging). The prometheus registry formats metrics
+             Micrometer is Spring Boot's metrics facade. 
+             The prometheus registry formats metrics
              in the Prometheus exposition format that Prometheus
              expects to scrape at /actuator/prometheus.
         ===================================================== -->

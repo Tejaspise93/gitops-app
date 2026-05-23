@@ -1,0 +1,90 @@
+(•_•) <) )╯|kubectl delete pod
+(╥_╥)|Watching production logs...
+(☉_☉)|Reading Kubernetes events
+(╯°□°)╯︵ ┻━┻|Flipping tables
+┬─┬ノ( º _ ºノ)|Putting the table back
+(•_•) <) )╯|Pipeline failed
+(•_•)>⌐■-■ (⌐■_■)|Deploying coolly
+(☕_☕)|Deploying on Friday evening
+(ノಠ益ಠ)ノ彡┻━┻|Absolutely not okay
+ヽ(｀Д´)ﾉ|Jenkins is stuck again
+(╥﹏╥)|ArgoCD says: OutOfSync
+(⊙_☉)|Someone pushed directly to main
+(¬_¬)|It worked in staging
+(ಠ_ಠ)|Who changed the YAML?
+(☠_☠)|OOMKilled again
+(ง'̀-'́)ง|Fighting production incidents
+(；￣Д￣)|Terraform plan looks suspicious
+(☉_☉)|CPU usage: 99%
+(っ◕‿◕)っ|Pipeline finally passed
+(ಥ﹏ಥ)|Merge conflict in values.yaml
+(• ε •)|Restarted the pod. Temporarily.
+(╬ಠ益ಠ)|CrashLoopBackOff
+(¬‿¬)|Blaming DNS with confidence
+(ᵔᴥᵔ)|All pods are healthy
+(☕‿☕)|Monitoring Grafana dashboards
+(⊙﹏⊙)|kubectl apply in production
+(☞ﾟヮﾟ)☞|GitOps all the things
+(⌐■_■)|Zero downtime deployment
+(；一_一)|Why did Jenkins work yesterday
+(╯︵╰,)|Helm upgrade failed
+(☉̃ₒ☉)|Production CPU just spiked
+(•̀ᴗ•́)و|Fix deployed. Monitoring closely.
+(；ﾟДﾟ)|Who deleted the namespace?
+(ʘᗩʘ’)|Memory leak detected
+(｡◕‿◕｡)|All health checks passed
+(⊘_⊘)|Container exited with code 137
+(￣▽￣)|The monitoring dashboard looks beautiful
+(╥ᆺ╥；)|The pod restarted during the demo
+(⊙﹏⊙✿)|kubectl get pods looked normal yesterday
+(¬▂¬)|The YAML validates but still fails
+༼ つ ◕_◕ ༽つ|Offering sacrifices to the CI gods
+(╯°□°）╯︵ .git|Accidentally force pushed to main
+¯\_(ツ)_/¯|The bug disappeared during debugging
+(ಠ_ಠ)>⌐■-■|Root cause identified. Probably.
+༼ʘ̚ل͜ʘ̚༽|Reading legacy shell scripts
+(ง°ل͜°)ง|SSH'ing into production confidently
+(ﾉಥ益ಥ）ﾉ|The intern has cluster-admin
+(☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜)|Blue-green deployment dance
+(；￣Д￣）|There are 12 replicas. Why are all unhealthy?
+ʕ •ᴥ•ʔ|Pretending to understand Istio
+(ノಠ痊ಠ)ノ|Someone edited the manifest manually
+(；一_一)|The fix is in Stack Overflow somewhere
+(⊙.☉)7|Hotfix directly in production
+(づ｡◕‿‿◕｡)づ|Hugging the only stable microservice
+(ಠ‿↼)|Skipping tests to save time
+┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻|Two outages in one deployment
+(⌐■_■)ノ♪|Deploying while pretending nothing is broken
+(；¬＿¬)|This YAML has 900 lines
+ლ(ಠ益ಠლ)|Trying to understand Kubernetes networking
+(☞⌐▀͡ ͜ʖ͡▀ )☞|Merged without reading the PR
+(；ﾟдﾟ)|The database migration cannot be rolled back
+(ᵔ◡ᵔ)|Monitoring says everything is fine
+(☉_☉ )|Users say otherwise
+ᕕ( ᐛ )ᕗ|Scaling horizontally because nobody optimized
+(╥☁╥ )|Cloud bill arrived
+(ง •̀_•́)ง‼|Debugging a problem caused by debugging
+(¬､¬)|The logs rotated before we checked them
+(ಠ‿ಠ)╭∩╮|Rejecting kubectl edit in production
+(☞ರヮರ)☞|CI passed after changing nothing
+(ʘ‿ʘ)|The canary deployment survived
+(；◔ิд◔ิ)|There is no backup
+(ﾉ≧ڡ≦)|Accidentally deployed to prod instead of staging
+(┛ಠ_ಠ)┛彡┻━┻|YAML syntax error on line 847
+(￣^￣)ゞ|Refusing to use latest tag
+(ಥ‿ಥ)|The rollback worked
+(☉౪ ⊙)|The rollback broke something else
+┬┴┬┴┤(･_├┬┴┬┴|Watching the deployment silently
+(っ˘ڡ˘ς)|Consuming observability dashboards
+(☠‿☠)|Deleting old resources without checking dependencies
+(╬ Ò﹏Ó)|Service mesh added 14 new problems
+( ͡° ͜ʖ ͡°)|The issue only happens during demos
+(⊙ω⊙)|The CPU graph looks like a heartbeat
+(；′⌒`)|Waiting for pods to terminate
+(ง •̀ゝ•́)ง|Fighting race conditions
+(ノ￣皿￣)ノ ⌒== ┫|Throwing away the broken Helm chart
+(ಡ艸ಡ)|The monitoring alert was ignored successfully
+(☞ﾟ∀ﾟ)☞|Microservices were a mistake
+(✿◠‿◠)|Everything works after restarting Kubernetes
+(ʘ言ʘ╬)|Trying to explain GitOps to developers
+ヽ༼ ಠ益ಠ ༽ﾉ|The cluster autoscaler woke up angry

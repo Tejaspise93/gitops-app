@@ -39,7 +39,7 @@ USER appuser
 EXPOSE 8080
 
 # -----------------------------------------------------------------------------
-# JVM FLAGS — Production tuning
+# JVM FLAGS
 #
 # -XX:+UseContainerSupport (default ON in JDK 11+, listed for explicitness):
 #   Makes the JVM read cgroup memory/CPU limits instead of host resources.

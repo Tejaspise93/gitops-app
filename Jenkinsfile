@@ -60,8 +60,8 @@ pipeline {
             post {
                 success {
                     // Archive the fat JAR as a Jenkins build artifact.
-                    // This allows you to download the exact JAR from any build
-                    // directly from the Jenkins UI — useful for debugging.
+                    // This allows download of the exact JAR from any build
+                    // directly from the Jenkins UI.
                     archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
                 }
             }
@@ -77,8 +77,7 @@ pipeline {
             post {
                 always {
                     // Publish JUnit XML test results to Jenkins regardless of
-                    // pass/fail. Jenkins parses these and renders a test trend
-                    // graph over time in the job dashboard.
+                    // pass/fail.
                     // Maven Surefire plugin writes results to target/surefire-reports/.
                     junit '**/target/surefire-reports/TEST-*.xml'
                 }

@@ -20,9 +20,6 @@ public class HelloController {
     @Autowired
     private BuildProperties buildProperties;
 
-    // -------------------------------------------------------------------------
-    // shown on /hello — rotates randomly on each request.
-    // -------------------------------------------------------------------------
     private static final List<String> FUN_FACTS = List.of(
         "Works on my machine. Production disagrees.",
         "This deployment had zero downtime. Emotionally, however, the team is unstable.",
@@ -56,6 +53,39 @@ public class HelloController {
         "The application is stateless. The developers are not."
     );
 
+    private static final List<String> HOW_I_LOOK_RIGHT_NOW = List.of(
+        "(•_•)\n<) )╯ kubectl delete pod\n / \\",
+        "(╥_╥)\nWatching production logs...",
+        "(☉_☉)\nReading Kubernetes events",
+        "(╯°□°)╯︵ ┻━┻",
+        "┬─┬ノ( º _ ºノ)",
+        "(•_•)\n<)   )╯ Pipeline failed\n /    \\",
+        "(•_•)\n( •_•)>⌐■-■\n(⌐■_■)",
+        "(☕_☕)\nDeploying on Friday evening",
+        "(ノಠ益ಠ)ノ彡┻━┻",
+        "ヽ(｀Д´)ﾉ\nJenkins is stuck again",
+        "(╥﹏╥)\nArgoCD says: OutOfSync",
+        "(⊙_☉)\nSomeone pushed directly to main",
+        "(¬_¬)\n\"It worked in staging\"",
+        "(ಠ_ಠ)\nWho changed the YAML?",
+        "(☠_☠)\nOOMKilled again",
+        "(ง'̀-'́)ง\nFighting production incidents",
+        "(；￣Д￣)\nTerraform plan looks suspicious",
+        "(☉_☉)\nCPU usage: 99%",
+        "(っ◕‿◕)っ\nPipeline finally passed",
+        "(ಥ﹏ಥ)\nMerge conflict in values.yaml",
+        "(• ε •)\nRestarted the pod. Problem solved temporarily.",
+        "(╬ಠ益ಠ)\nCrashLoopBackOff",
+        "(¬‿¬)\nBlaming DNS with confidence",
+        "(ᵔᴥᵔ)\nAll pods are healthy",
+        "(☕‿☕)\nMonitoring Grafana dashboards",
+        "(⊙﹏⊙)\nkubectl apply in production",
+        "(☞ﾟヮﾟ)☞\nGitOps all the things",
+        "(⌐■_■)\nZero downtime deployment",
+        "(；一_一)\nInvestigating why Jenkins worked yesterday",
+        "(╯︵╰,)\nHelm upgrade failed"
+    );
+
     private static final Random RANDOM = new Random();
 
     @GetMapping("/health")
@@ -78,16 +108,18 @@ public class HelloController {
                 .withZone(ZoneId.of("UTC"))
                 .format(Instant.now());
 
-        String funFact = FUN_FACTS.get(RANDOM.nextInt(FUN_FACTS.size()));
+        String clusterTruth  = FUN_FACTS.get(RANDOM.nextInt(FUN_FACTS.size()));
+        String currentMood   = HOW_I_LOOK_RIGHT_NOW.get(RANDOM.nextInt(HOW_I_LOOK_RIGHT_NOW.size()));
 
         Map<String, Object> response = new LinkedHashMap<>();
-        response.put("message",     "Hello from the GitOps Pipeline!");
-        response.put("application", buildProperties.getName());
-        response.put("version",     buildProperties.getVersion());
-        response.put("built_at",    builtAt);
-        response.put("server_time", serverTime);
-        response.put("status",      "running");
-        response.put("cluster_truth",    funFact);
+        response.put("message",          "Hello from the GitOps Pipeline!");
+        response.put("application",      buildProperties.getName());
+        response.put("version",          buildProperties.getVersion());
+        response.put("built_at",         builtAt);
+        response.put("server_time",      serverTime);
+        response.put("status",           "running");
+        response.put("cluster_truth",    clusterTruth);
+        response.put("current_mood",     currentMood);
 
         return ResponseEntity.ok(response);
     }

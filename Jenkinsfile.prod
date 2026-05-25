@@ -1,0 +1,70 @@
+// Jenkinsfile.promote
+pipeline {
+
+    agent any
+
+    parameters {
+        string(name: 'IMAGE_TAG', description: 'Git commit SHA to promote to prod')
+    }
+
+    environment {
+        IMAGE_NAME       = "tejaspise/gitops-app"
+        CONFIG_REPO_NAME = "gitops-config"
+        PROD_VALUES_PATH = "environments/prod/values.yaml"
+    }
+
+    stages {
+
+        stage('Verify Image Exists') {
+            steps {
+                sh """
+                    docker pull ${IMAGE_NAME}:${params.IMAGE_TAG}
+                    echo "Image verified: ${IMAGE_NAME}:${params.IMAGE_TAG}"
+                """
+            }
+        }
+
+        stage('Promote to Prod') {
+            steps {
+                withCredentials([
+                    string(credentialsId: 'github-token',   variable: 'GH_TOKEN'),
+                    string(credentialsId: 'git-user-email', variable: 'GIT_EMAIL'),
+                    string(credentialsId: 'git-user-name',  variable: 'GIT_NAME')
+                ]) {
+                    sh """
+                        rm -rf ${CONFIG_REPO_NAME}
+                        git clone https://${GH_TOKEN}@github.com/Tejaspise93/${CONFIG_REPO_NAME}.git
+
+                        cd ${CONFIG_REPO_NAME}
+                        git config user.email "${GIT_EMAIL}"
+                        git config user.name  "${GIT_NAME}"
+
+                        yq e '.image.tag = "${params.IMAGE_TAG}"' -i ${PROD_VALUES_PATH}
+
+                        git add ${PROD_VALUES_PATH}
+                        git commit -m "promote: gitops-app ${params.IMAGE_TAG} to prod [build #${BUILD_NUMBER}]"
+                        git push origin main
+
+                        cd ..
+                        rm -rf ${CONFIG_REPO_NAME}
+                    """
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo """
+            =========================================
+            PROMOTED TO PROD
+            =========================================
+            Image : ${IMAGE_NAME}:${params.IMAGE_TAG}
+            =========================================
+            """
+        }
+        always {
+            cleanWs(notFailBuild: true)
+        }
+    }
+}

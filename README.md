@@ -55,6 +55,7 @@ Navigate to `Manage Jenkins → Credentials → Global → Add Credential` and c
 | `github-token` | Secret Text | Fine-grained PAT with `Contents: Read and Write` on `gitops-config` repo | Update Config Repo stage |
 | `git-user-email` | Secret Text | Email to use for git commits in the config repo (e.g. `ci-bot@example.com`) | Update Config Repo stage |
 | `git-user-name` | Secret Text | Name to use for git commits in the config repo (e.g. `Jenkins CI`) | Update Config Repo stage |
+| `sonar-token` | Secret Text |SonarQube authentication | code quality test |
 
 ---
 

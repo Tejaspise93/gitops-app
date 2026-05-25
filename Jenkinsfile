@@ -76,9 +76,7 @@ pipeline {
             }
             post {
                 always {
-                    // Publish JUnit XML test results to Jenkins regardless of
-                    // pass/fail.
-                    // Maven Surefire plugin writes results to target/surefire-reports/.
+                    // Publish JUnit XML test results to Jenkins regardless of pass/fail.
                     junit '**/target/surefire-reports/TEST-*.xml'
                 }
                 failure {
@@ -92,18 +90,16 @@ pipeline {
         // =====================================================================
         stage('SonarQube Analysis') {
             steps {
-                echo 'SonarQube analysis is disabled.'
-
-                // withSonarQubeEnv('SonarQube') {
-                //     sh '''
-                //         mvn -B sonar:sonar \
-                //             -Dsonar.projectKey=gitops-app \
-                //             -Dsonar.projectName="GitOps App" \
-                //             -Dsonar.java.coveragePlugin=jacoco \
-                //             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
-                //     '''
-                // }
-                // waitForQualityGate abortPipeline: true
+                withSonarQubeEnv('SonarQube') {
+                    sh '''
+                        mvn -B sonar:sonar \
+                            -Dsonar.projectKey=gitops-app \
+                            -Dsonar.projectName="GitOps App" \
+                            -Dsonar.java.coveragePlugin=jacoco \
+                            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml\
+                    '''
+                }
+                waitForQualityGate abortPipeline: true
             }
         }
 

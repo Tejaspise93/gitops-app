@@ -23,7 +23,7 @@ FROM eclipse-temurin:17-jre-jammy
 
 LABEL org.opencontainers.image.title="gitops-app" \
       org.opencontainers.image.description="Spring Boot app for GitOps portfolio" \
-      org.opencontainers.image.source="https://github.com/YOUR_USERNAME/gitops-app"
+      org.opencontainers.image.source="https://github.com/Tejaspise93/gitops-app"
 
 WORKDIR /app
 

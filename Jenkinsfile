@@ -86,7 +86,7 @@ pipeline {
         }
 
         // =====================================================================
-        // STAGE 4 — SONARQUBE ANALYSIS (PLACEHOLDER)
+        // STAGE 4 — SONARQUBE ANALYSIS
         // =====================================================================
         stage('SonarQube Analysis') {
             steps {

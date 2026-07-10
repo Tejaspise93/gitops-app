@@ -1,4 +1,4 @@
-name: CI - Build, Test, Dockerize
+name: CI - Build, Test, Dockerize, gitops-config update
 
 on:
     push:

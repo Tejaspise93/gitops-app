@@ -115,7 +115,7 @@ jobs:
               uses: aquasecurity/trivy-action@v0.36.0
               with:
                 image-ref: ${{ env.IMAGE_NAME }}:${{ needs.build-test.outputs.image_tag }}
-                vuln-type: 'application'
+                vuln-type: 'library'
                 severity: 'MEDIUM,HIGH,CRITICAL'
                 exit-code: '0' # always succeed, but report of vulnerabilities uploaded to github actions artifacts
                 format: 'table'

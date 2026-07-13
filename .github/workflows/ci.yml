@@ -67,7 +67,7 @@ jobs:
                   retention-days: 10
 
     docker-build-push:
-        name: Docker Build & Push
+        name: Docker Build, Scan & Push
         needs: build-test
         runs-on: ubuntu-latest
 
@@ -84,11 +84,12 @@ jobs:
                   username: ${{ secrets.DOCKERHUB_USERNAME }}
                   password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-            - name: Build and Push
+            - name: Build image
               uses: docker/build-push-action@v7
               with:
                   context: .
-                  push: true
+                  push: false # will be pushing image in the next step, after scanning it
+                  load: True  # load the image into the local docker cache, so that it can be scanned in the next step
                   tags: |
                       ${{ env.IMAGE_NAME }}:${{ needs.build-test.outputs.image_tag }}
                       ${{ env.IMAGE_NAME }}:latest
@@ -100,6 +101,40 @@ jobs:
                       type=gha # github actions cache, as runners are ephemeral they don't have a persistent docker cache
                       #   this solves that issue by caching the layers in github actions cache
                   cache-to: type=gha,mode=max # same as above, but this is the cache destination, so that the next run can use it
+            
+            - name: Trivy Scan - OS packages (blocking gate)
+              uses: aquasecurity/trivy-action@v0.36.0
+              with:
+                image-ref: ${{ env.IMAGE_NAME }}:${{ needs.build-test.outputs.image_tag }}
+                vuln-type: 'os'
+                severity: 'CRITICAL,HIGH'
+                exit-code: '1' # if vulnerabilities are found, exit with code 1 to fail the job
+                format: 'table'
+
+            - name: Trivy Scan - Application dependencies (report only, non-blocking gate)
+              uses: aquasecurity/trivy-action@v0.36.0
+              with:
+                image-ref: ${{ env.IMAGE_NAME }}:${{ needs.build-test.outputs.image_tag }}
+                vuln-type: 'application'
+                severity: 'MEDIUM,HIGH,CRITICAL'
+                exit-code: '0' # always succeed, but report of vulnerabilities uploaded to github actions artifacts
+                format: 'table'
+                trivyignores: '.trivyignore'
+                output: 'trivy-library-report.txt'
+          
+            - name: Upload Trivy Report
+              if: always()
+              uses: actions/upload-artifact@v7
+              with:
+                  name: trivy-library-report-${{ needs.build-test.outputs.image_tag }}
+                  path: trivy-library-report.txt
+                  retention-days: 10
+            
+            - name: Push image to Docker Hub
+              run: |
+                  docker push ${{ env.IMAGE_NAME }}:${{ needs.build-test.outputs.image_tag }}
+                  docker push ${{ env.IMAGE_NAME }}:latest
+
 
     update-gitops-config:
         name: Update GitOps Config Repo

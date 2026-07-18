@@ -1,12 +1,12 @@
 // =============================================================================
-// Jenkinsfile — gitops-app
+// Jenkinsfile - gitops-app
 //
 // CREDENTIALS (configure in Jenkins → Manage Jenkins → Credentials):
-//   dockerhub-credentials  : Username/Password — Docker Hub login
-//   github-token           : Secret Text — GitHub PAT for pushing to gitops-config
-//   git-user-email         : Secret Text — email for git commit in config repo
-//   git-user-name          : Secret Text — name for git commit in config repo
-//   github-app-repo        : Username/Password (pat) — gitHub login
+//   dockerhub-credentials  : Username/Password - Docker Hub login
+//   github-token           : Secret Text - GitHub PAT for pushing to gitops-config
+//   git-user-email         : Secret Text - email for git commit in config repo
+//   git-user-name          : Secret Text - name for git commit in config repo
+//   github-app-repo        : Username/Password (pat) - gitHub login
 // =============================================================================
 
 pipeline {
@@ -22,7 +22,7 @@ pipeline {
     }
 
     options {
-        // Discard old builds — keeps Jenkins storage from growing unbounded.
+        // Discard old builds - keeps Jenkins storage from growing unbounded.
         // Keeps last 10 build logs and last 5 artifacts.
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '5'))
 
@@ -34,7 +34,7 @@ pipeline {
     stages {
 
         // =====================================================================
-        // STAGE 1 — CHECKOUT
+        // STAGE 1 - CHECKOUT
         // =====================================================================
         stage('Checkout') {
             steps {
@@ -51,7 +51,7 @@ pipeline {
         }
 
         // =====================================================================
-        // STAGE 2 — MAVEN BUILD
+        // STAGE 2 - MAVEN BUILD
         // =====================================================================
         stage('Maven Build') {
             steps {
@@ -68,7 +68,7 @@ pipeline {
         }
 
         // =====================================================================
-        // STAGE 3 — UNIT TESTS
+        // STAGE 3 - UNIT TESTS
         // =====================================================================
         stage('Unit Tests') {
             steps {
@@ -86,7 +86,7 @@ pipeline {
         }
 
         // =====================================================================
-        // STAGE 4 — SONARQUBE ANALYSIS
+        // STAGE 4 - SONARQUBE ANALYSIS
         // =====================================================================
         stage('SonarQube Analysis') {
             steps {
@@ -104,7 +104,7 @@ pipeline {
         }
 
         // =====================================================================
-        // STAGE 5 — DOCKER BUILD
+        // STAGE 5 - DOCKER BUILD
         // =====================================================================
         stage('Docker Build') {
             steps {
@@ -126,7 +126,7 @@ pipeline {
         }
 
         // =====================================================================
-        // STAGE 6 — DOCKER PUSH
+        // STAGE 6 - DOCKER PUSH
         // =====================================================================
         stage('Docker Push') {
             steps {
@@ -161,7 +161,7 @@ pipeline {
         }
 
         // =====================================================================
-        // STAGE 7 — UPDATE IMAGE TAG IN GITOPS CONFIG REPO
+        // STAGE 7 - UPDATE IMAGE TAG IN GITOPS CONFIG REPO
         // =====================================================================
         stage('Update Image Tag in Config Repo') {
             steps {
@@ -188,8 +188,12 @@ pipeline {
                         cat ${VALUES_FILE_PATH}
 
                         git add ${VALUES_FILE_PATH}
-                        git commit -m "ci: update gitops-app image tag to ${IMAGE_TAG} [build #${BUILD_NUMBER}]"
-                        git push origin main
+                        if git diff --cached --quiet; then
+                            echo "No changes to commit - image tag is already up to date. Skipping."
+                        else
+                            git commit -m "ci: update gitops-app image tag to ${IMAGE_TAG} [ ~~Jenkins~~ build #${BUILD_NUMBER}]"
+                            git push origin main
+                        fi
 
                         echo "Config repo updated. ArgoCD will detect and sync shortly."
 

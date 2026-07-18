@@ -29,7 +29,7 @@ A minimal Java Spring Boot application built as the deployment target for a GitO
 
 ---
 
-## CI/CD Pipeline — Jenkins Requirements
+## CI/CD Pipeline - Jenkins Requirements
 
 ### Installed Software on Jenkins Agent
 
@@ -118,7 +118,7 @@ gitops-app/
 
 | Repository | Purpose |
 |---|---|
-| `gitops-app` | This repo — application source code and pipeline |
-| `gitops-config` | Helm values and environment manifests — watched by ArgoCD |
+| `gitops-app` | This repo - application source code and pipeline |
+| `gitops-config` | Helm values and environment manifests - watched by ArgoCD |
 
 ---

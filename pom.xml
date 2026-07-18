@@ -12,7 +12,7 @@
     <packaging>jar</packaging>
 
     <name>gitops-app</name>
-    <description>Spring Boot app — GitOps + Observability portfolio project</description>
+    <description>Spring Boot app - GitOps + Observability portfolio project</description>
 
     <!-- =========================================================
          Parent: Spring Boot BOM (Bill of Materials)
@@ -29,7 +29,7 @@
     </parent>
 
     <properties>
-        <!-- Java 17 LTS — matches our Dockerfile base image.
+        <!-- Java 17 LTS - matches our Dockerfile base image.
              Spring Boot 3.x requires Java 17 as minimum. -->
         <java.version>17</java.version>
     </properties>
@@ -48,9 +48,9 @@
 
         <!-- =====================================================
              Actuator: Exposes production-ready endpoints:
-               /actuator/health  — liveness/readiness probes
-               /actuator/info    — build metadata
-               /actuator/prometheus — Prometheus scrape endpoint
+               /actuator/health  - liveness/readiness probes
+               /actuator/info    - build metadata
+               /actuator/prometheus - Prometheus scrape endpoint
              This is what Prometheus will scrape in Phase 2.
         ===================================================== -->
         <dependency>
@@ -73,7 +73,7 @@
         <!-- =====================================================
              Test: JUnit 5 + Mockito + Spring Test support.
              'test' scope means this is never bundled into the
-             final JAR — only used during the Maven test phase.
+             final JAR - only used during the Maven test phase.
         ===================================================== -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -105,7 +105,7 @@
                                 Spring Boot Actuator reads this and exposes it via
                                 /actuator/info AND injects it as a BuildProperties bean
                                 you can autowire anywhere in your application.
-                                This means pom.xml version is the single source of truth —
+                                This means pom.xml version is the single source of truth -
                                 no hardcoding the version anywhere in Java code. -->
                             <goal>build-info</goal>
                         </goals>
@@ -114,11 +114,11 @@
             </plugin>
 
             <!-- =====================================================
-                 JaCoCo — Java Code Coverage
+                 JaCoCo - Java Code Coverage
                  Generates XML coverage report that SonarQube reads.
                  'prepare-agent' binds to test phase automatically.
                  'report' generates target/site/jacoco/jacoco.xml
-                 after tests complete — exactly the path SonarQube
+                 after tests complete - exactly the path SonarQube
                  expects in the Jenkinsfile sonar:sonar command.
             ===================================================== -->
             <plugin>

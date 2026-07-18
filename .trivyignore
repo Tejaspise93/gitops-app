@@ -1,3 +1,3 @@
 # Format: one CVE ID per line, with a reason comment above it.
-# These are issues from Spring Boot —
+# These are issues from Spring Boot -
 # Tracked for awareness, uploaded Trivy report on every build.

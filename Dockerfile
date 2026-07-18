@@ -1,5 +1,5 @@
 # =============================================================================
-# STAGE 1 — BUILD STAGE
+# STAGE 1 - BUILD STAGE
 # =============================================================================
 FROM maven:3.9-eclipse-temurin-17 AS builder
 
@@ -15,7 +15,7 @@ COPY src ./src
 RUN mvn -B package -DskipTests=true
 
 # =============================================================================
-# STAGE 2 — RUNTIME STAGE
+# STAGE 2 - RUNTIME STAGE
 # =============================================================================
 
 FROM eclipse-temurin:17-jre-jammy
@@ -44,13 +44,13 @@ EXPOSE 8080
 # -XX:+UseContainerSupport (default ON in JDK 11+, listed for explicitness):
 #   Makes the JVM read cgroup memory/CPU limits instead of host resources.
 #   Without this (older JDKs), the JVM would see host RAM (e.g., 64GB) and
-#   set heap accordingly — causing OOMKilled pods in Kubernetes.
+#   set heap accordingly - causing OOMKilled pods in Kubernetes.
 #
 # -XX:MaxRAMPercentage=75.0:
 #   Sets max heap to 75% of the container's memory limit.
 #   Leaves 25% for the JVM's off-heap (metaspace, thread stacks, native mem).
 #   Example: 512Mi container limit → ~384Mi max heap.
-#   Never hardcode -Xmx in containers — it ignores cgroup limits.
+#   Never hardcode -Xmx in containers - it ignores cgroup limits.
 #
 # -Djava.security.egd=file:/dev/./urandom:
 #   Fixes slow startup on some Linux environments where the JVM blocks

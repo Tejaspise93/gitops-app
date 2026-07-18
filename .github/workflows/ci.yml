@@ -169,8 +169,8 @@ jobs:
                   git add environments/dev/values.yaml
                   
                   if git diff --cached --quiet; then
-                    echo "No changes to commit — image tag is already up to date. Skipping."
+                    echo "No changes to commit - image tag is already up to date. Skipping."
                   else
-                    git commit -m "ci: update gitops-app image tag to ${{ needs.build-test.outputs.image_tag }} [run #${{ github.run_number }}]"
+                    git commit -m "ci: update gitops-app image tag to ${{ needs.build-test.outputs.image_tag }} [ ~~GithubActions~~ run #${{ github.run_number }}]"
                     git push origin main
                   fi

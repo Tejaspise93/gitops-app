@@ -30,9 +30,7 @@ WORKDIR /app
 RUN groupadd --system --gid 1001 appgroup && \
     useradd --system --uid 1001 --gid appgroup --no-create-home appuser
 
-COPY --from=builder /build/target/*.jar app.jar
-
-RUN chown appuser:appgroup app.jar
+COPY --from=builder --chown=appuser:appgroup /build/target/*.jar app.jar
 
 USER appuser
 

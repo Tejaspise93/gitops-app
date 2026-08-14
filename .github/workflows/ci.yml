@@ -8,6 +8,7 @@ on:
         paths:
             - "src/**"
             - "pom.xml"
+            - "Dockerfile"
     workflow_dispatch: {} # manual trigger
 
 env:
